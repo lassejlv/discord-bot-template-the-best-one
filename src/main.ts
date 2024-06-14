@@ -3,7 +3,6 @@ import { Glob } from "bun";
 import path from "path";
 import type { Command } from "./types/Command";
 import redis from "./utils/redis";
-import { Logger } from "term-logger";
 import type { SlashCommandProps } from "commandkit";
 
 const client = new Client({

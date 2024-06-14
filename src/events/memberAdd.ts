@@ -8,7 +8,7 @@ export default defineEvent({
   once: false,
 
   execute: async (member: GuildMember) => {
-    const guild = await redis.get(`guild:${member.guild.id}`);
+    let guild = await redis.get(`guild:${member.guild.id}`);
     if (!guild) return;
 
     const parsedGuild = JSON.parse(guild) as Guild;
