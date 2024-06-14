@@ -2,6 +2,7 @@ import { Client, GatewayIntentBits, Collection, Events } from "discord.js";
 import { Glob } from "bun";
 import path from "path";
 import type { Command } from "./types/Command";
+import redis from "./utils/redis";
 
 const client = new Client({
   intents: Object.keys(GatewayIntentBits).map((key) => GatewayIntentBits[key as keyof typeof GatewayIntentBits]),
@@ -45,6 +46,14 @@ client.on(Events.InteractionCreate, async (interaction) => {
   // Get the command from the collection
   const command = commands.get(interaction.commandName);
   if (!command) return;
+
+  const hasCooldown = await redis.get(`cooldown:${interaction.user.id}:${command.data.name}`);
+  if (hasCooldown) return interaction.reply({ content: "You're on cooldown", ephemeral: true });
+  else {
+    const key = `cooldown:${interaction.user.id}:${command.data.name}`;
+    await redis.set(key, "true");
+    await redis.expire(key, 6);
+  }
 
   try {
     command.execute(interaction);

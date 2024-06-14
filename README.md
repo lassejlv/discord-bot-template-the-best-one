@@ -11,12 +11,16 @@ This template will be updated with new features and improvements. If you have an
 - Event Handler
 - Type Safe
 - Docker Support
+- Cooldowns
+- Redis Cache
 - Build-in Sharding Support (when you need it)
 - Easy to use
 
 ## Getting Started
 
 This template does not use node.js as the runtime. It uses [Bun](https://bun.sh) as the runtime. Bun is a runtime like node.js but faster a lot faster. And just better. So make sure you have Bun installed on your machine.
+
+By default all intents are enabled. We highly recommend you to enable only the intents you need. You can do that in the `src/main.ts` file.
 
 1. Clone this repository
 
