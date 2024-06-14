@@ -1,0 +1,32 @@
+{
+  "name": "discord-bot-template-dirzzle-turso",
+  "module": "src/main.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest",
+    "commandkit": "^0.1.10",
+    "drizzle-kit": "^0.22.7",
+    "prisma": "5.15.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.6.2",
+    "@prisma/adapter-libsql": "^5.15.0",
+    "@prisma/client": "5.15.0",
+    "@samocodes/bun-cache": "^1.0.8",
+    "discord.js": "^14.15.3",
+    "drizzle-orm": "^0.31.2",
+    "ora": "^8.0.1",
+    "redis": "^4.6.14",
+    "term-logger": "^1.3.1"
+  },
+  "scripts": {
+    "dev": "bun --watch src/main.ts",
+    "start": "bun src/main.ts",
+    "start:shard": "bun src/utils/shard.ts",
+    "compile": "bun build --compile --minify src/main.ts --outfile bot",
+    "deploy": "bun src/utils/deploy-commands.ts"
+  }
+}

@@ -1,0 +1,52 @@
+# Discord Bot Template
+
+The only right way to start a new Discord bot project. This template comes with nice way commands are structured (type safe). It also comes with event handler (type safe). Everything is type safe and easy to use.
+
+This template will be updated with new features and improvements. If you have any suggestions or improvements, feel free to open an issue or a pull request.
+
+## Features
+
+- Prisma ORM
+- Command Handler
+- Event Handler
+- Type Safe
+- Docker Support
+- Build-in Sharding Support (when you need it)
+- Easy to use
+
+## Getting Started
+
+This template does not use node.js as the runtime. It uses [Bun](https://bun.sh) as the runtime. Bun is a runtime like node.js but faster a lot faster. And just better. So make sure you have Bun installed on your machine.
+
+1. Clone this repository
+
+- `git clone https://github.com/lassejlv/discord-bot-template-the-best-one.git`
+
+2. Install dependencies
+
+- `bun install` (you can use npm or pnpm if you want)
+
+3. Create a `.env` file
+
+Required environment variables:
+
+```
+# For database you can choose between the ones that prismas support.
+# In this case we are using sqlite (turso)
+TURSO_CONNECTION_URL=
+TURSO_AUTH_TOKEN=
+DISCORD_TOKEN=
+REDIS_PASSWORD=
+REDIS_HOST=
+REDIS_PORT=
+DISCORD_CLIENT_ID=
+# Change log level to none when you are in production
+LOG_LEVEL=debug
+```
+
+4. Run the bot
+
+- `bun dev` (in development)
+- `bun start` (in production)
+
+And you are good to go! Contact me on discord if you have any questions: `lassejlv`
