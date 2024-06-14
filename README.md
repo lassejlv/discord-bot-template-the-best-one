@@ -54,3 +54,50 @@ LOG_LEVEL=debug
 - `bun start` (in production)
 
 And you are good to go! Contact me on discord if you have any questions: `lassejlv`
+
+## Using commands
+
+You can have as many sub folders in the "commands" folder as you want. The commands are loaded automatically using bun:glob. The commands are structured in a nice way and are type safe.
+
+Example command:
+
+```ts
+import { SlashCommandBuilder } from "discord.js";
+import defineCommand from "@/utils/defineCommand";
+
+export default defineCommand({
+  data: new SlashCommandBuilder().setName("ping").setDescription("Replies with Pong!"),
+
+  execute: async (interaction, client) => {
+    await interaction.reply("Pong!");
+  },
+});
+```
+
+In here you have access to the interaction and the client directly (both are type-safe). It's not required to use the client option. But it's there if you need it (wich you probably will).
+
+## Using events
+
+As the commands, the events are also structured in a nice way and are type safe. The events are loaded automatically using bun:glob.
+
+Example event:
+
+```ts
+import { Client, Events } from "discord.js";
+import defineEvent from "@/utils/defineEvent";
+
+export default defineEvent({
+  name: Events.ClientReady,
+  once: true,
+  execute: (client: Client) => {
+    console.log(`Logged in as ${client.user?.tag} (${client.user?.id})`);
+    console.log("Run `bun run deploy` to deploy slash-commands.");
+
+    client.user?.setActivity({
+      name: "/help for commands lol",
+    });
+  },
+});
+```
+
+Here we import the `Events` from discord.js. Wich is required to use. The execute function takes the arguments from the event. In this case you will need to import the types from discord.js based on the event you are using.

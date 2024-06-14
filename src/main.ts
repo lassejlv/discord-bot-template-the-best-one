@@ -3,6 +3,8 @@ import { Glob } from "bun";
 import path from "path";
 import type { Command } from "./types/Command";
 import redis from "./utils/redis";
+import { Logger } from "term-logger";
+import type { SlashCommandProps } from "commandkit";
 
 const client = new Client({
   intents: Object.keys(GatewayIntentBits).map((key) => GatewayIntentBits[key as keyof typeof GatewayIntentBits]),
@@ -27,8 +29,6 @@ for await (const file of commandsGlob.scan(".")) {
 for await (const file of eventsGlob.scan(".")) {
   const filePath = path.resolve(process.cwd(), file);
   const { name, once, execute } = await import(filePath).then((m) => m.default);
-
-  console.log(name, once, execute);
 
   if (!name || !execute) throw new Error(`Missing name or execute function in ${filePath}`);
 
@@ -56,7 +56,7 @@ client.on(Events.InteractionCreate, async (interaction) => {
   }
 
   try {
-    command.execute(interaction);
+    command.execute(interaction, client as SlashCommandProps["client"]);
   } catch (error: any) {
     console.error(error.message);
 
