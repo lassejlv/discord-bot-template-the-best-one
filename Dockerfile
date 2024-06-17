@@ -9,6 +9,9 @@ COPY . .
 # Install dependencies
 RUN bun install --no-save
 
+# Compile Application
+RUN bun build src/main.ts --compile --outfile bot
+
 # Run Prisma Migrate and Generate
 RUN bun x prisma migrate deploy --preview-feature
 RUN bun x prisma generate
@@ -17,4 +20,4 @@ RUN bun x prisma generate
 RUN bun run deploy
 
 # Run the application
-CMD ["bun", "start"]
+CMD ["./bot"]
