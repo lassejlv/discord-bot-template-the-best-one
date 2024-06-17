@@ -39,34 +39,6 @@ for await (const file of eventsGlob.scan(".")) {
   }
 }
 
-// Handle commands
-client.on(Events.InteractionCreate, async (interaction) => {
-  if (!interaction.isChatInputCommand()) return;
-
-  // Get the command from the collection
-  const command = commands.get(interaction.commandName);
-  if (!command) return;
-
-  const hasCooldown = await redis.get(`cooldown:${interaction.user.id}:${command.data.name}`);
-  if (hasCooldown) return interaction.reply({ content: "You're on cooldown", ephemeral: true });
-  else {
-    const key = `cooldown:${interaction.user.id}:${command.data.name}`;
-    await redis.set(key, "true");
-    await redis.expire(key, 6);
-  }
-
-  try {
-    command.execute(interaction, client as Client<true>);
-  } catch (error: any) {
-    console.error(error.message);
-
-    if (interaction.replied || interaction.deferred) {
-      await interaction.followUp({
-        content: "An error occurred while executing this command",
-        ephemeral: true,
-      });
-    }
-  }
-});
-
 client.login(process.env.DISCORD_TOKEN);
+
+export default client;
