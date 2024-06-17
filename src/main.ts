@@ -2,7 +2,6 @@ import { Client, GatewayIntentBits, type ClientEvents, Collection, Events } from
 import { Glob } from "bun";
 import path from "path";
 import type { Command } from "./types/Command";
-import redis from "./utils/redis";
 
 const client = new Client({
   intents: Object.keys(GatewayIntentBits).map((key) => GatewayIntentBits[key as keyof typeof GatewayIntentBits]),
