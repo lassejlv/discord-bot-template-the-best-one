@@ -6,7 +6,7 @@ This template will be updated with new features and improvements. If you have an
 
 ## Features
 
-- Prisma ORM
+- Drizzle ORM (with turso)
 - Command Handler
 - Event Handler
 - Type Safe
@@ -62,11 +62,11 @@ You can have as many sub folders in the "commands" folder as you want. The comma
 Example command:
 
 ```ts
-import { SlashCommandBuilder } from "discord.js";
-import defineCommand from "@/utils/defineCommand";
-
 export default defineCommand({
-  data: new SlashCommandBuilder().setName("ping").setDescription("Replies with Pong!"),
+  data: {
+    name: "ping",
+    description: "Replies with Pong!",
+  },
 
   execute: async (interaction, client) => {
     await interaction.reply("Pong!");
@@ -87,17 +87,12 @@ import { Client, Events } from "discord.js";
 import defineEvent from "@/utils/defineEvent";
 
 export default defineEvent({
-  name: Events.ClientReady,
+  name: "ClientReady",
   once: true,
   execute: (client: Client) => {
     console.log(`Logged in as ${client.user?.tag} (${client.user?.id})`);
-    console.log("Run `bun run deploy` to deploy slash-commands.");
-
-    client.user?.setActivity({
-      name: "/help for commands lol",
-    });
   },
 });
 ```
 
-Here we import the `Events` from discord.js. Wich is required to use. The execute function takes the arguments from the event. In this case you will need to import the types from discord.js based on the event you are using.
+The name has auto-complete, so dw! The execute function takes the arguments from the event. In this case you will need to import the types from discord.js based on the event you are using.
