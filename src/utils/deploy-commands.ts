@@ -1,8 +1,8 @@
 import { Glob } from "bun";
 import { REST, Routes } from "discord.js";
+import type { Command } from "@/types/Command";
 import path from "path";
 import ora from "ora";
-import type { Command } from "@/types/Command";
 
 const TOKEN = process.env.DISCORD_TOKEN;
 const CLIENT_ID = process.env.DISCORD_CLIENT_ID;

@@ -22,9 +22,7 @@ redis.on("error", async (error) => {
   redis.connect();
 });
 
-redis.on("connect", () =>
-  console.log(`Connected to Redis at ${HOST.replace(/\w/g, "*")}:${PORT} on ${new Date().toISOString()}`)
-);
+redis.on("connect", () => console.log("Connected to Redis"));
 
 if (!redis.isOpen) {
   await redis.connect();
