@@ -62,6 +62,8 @@ You can have as many sub folders in the "commands" folder as you want. The comma
 Example command:
 
 ```ts
+import defineCommand from "@/utils/defineCommand";
+
 export default defineCommand({
   data: {
     name: "ping",
