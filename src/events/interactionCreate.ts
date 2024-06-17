@@ -1,5 +1,6 @@
-import client, { commands } from "@/main";
+import client from "@/main";
 import defineEvent from "@/utils/defineEvent";
+import { commands } from "@/utils/loaders";
 import redis from "@/utils/redis";
 import type { CacheType, Client, Interaction } from "discord.js";
 
