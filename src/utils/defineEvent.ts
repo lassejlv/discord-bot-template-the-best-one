@@ -1,7 +1,16 @@
+import { z } from "zod";
 import type { Event } from "../types/Event";
 
+const EventSchema = z.object({
+  name: z.string(),
+  once: z.boolean().optional(),
+  execute: z.function(),
+});
+
 function defineEvent(event: Event) {
-  if (!event.name || !event.execute) throw new Error(`Missing name or execute function in ${event}`);
+  const result = EventSchema.safeParse(event);
+  if (!result.success) throw new Error(result.error.message);
+
   return event;
 }
 

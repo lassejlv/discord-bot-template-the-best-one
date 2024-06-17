@@ -1,10 +1,26 @@
-import { SlashCommandBuilder } from "discord.js";
 import defineCommand from "@/utils/defineCommand";
+import { ApplicationCommandOptionType } from "discord.js";
 
 export default defineCommand({
-  data: new SlashCommandBuilder().setName("ping").setDescription("Replies with Pong!"),
+  data: {
+    name: "ping",
+    description: "Replies with Pong!",
+    options: [
+      {
+        name: "ephemeral",
+        description: "choose if the reply should be ephemeral",
+        type: ApplicationCommandOptionType.Boolean,
+        required: true,
+      },
+    ],
+  },
 
   execute: async (interaction, client) => {
-    await interaction.reply("Pong!");
+    const ephemeral = interaction.options.getBoolean("ephemeral", true);
+
+    await interaction.reply({
+      content: "Pong!",
+      ephemeral,
+    });
   },
 });

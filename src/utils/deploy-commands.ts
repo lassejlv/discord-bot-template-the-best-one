@@ -17,7 +17,7 @@ for await (const file of commandsGlob.scan(".")) {
 
   if (!data || !execute) throw new Error(`Missing data or execute function in ${filePath}`);
 
-  commands.push(data.toJSON());
+  commands.push(data);
 }
 
 // Deploy commands to discord

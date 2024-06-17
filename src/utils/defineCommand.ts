@@ -1,7 +1,18 @@
+import { z } from "zod";
 import type { Command } from "../types/Command";
 
+const CommandSchema = z.object({
+  data: z.object({
+    name: z.string(),
+    description: z.string(),
+  }),
+  execute: z.function(),
+});
+
 function defineCommand(command: Command) {
-  if (!command.data || !command.execute) throw new Error(`Missing data or execute function in ${command}`);
+  const result = CommandSchema.safeParse(command);
+  if (!result.success) throw new Error(result.error.message);
+
   return command;
 }
 
