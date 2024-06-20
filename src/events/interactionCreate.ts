@@ -21,7 +21,7 @@ export default defineEvent({
     else {
       const key = `cooldown:${interaction.user.id}:${command.data.name}`;
       await redis.set(key, "true");
-      await redis.expire(key, 6);
+      await redis.expire(key, 5);
     }
 
     try {

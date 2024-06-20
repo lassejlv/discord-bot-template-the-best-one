@@ -1,5 +1,5 @@
-import { client } from "@/main";
 import path from "path";
+import { client } from "@/main";
 import type { Command } from "@/types/Command";
 import { Glob } from "bun";
 import { Collection, Events, type ClientEvents } from "discord.js";
