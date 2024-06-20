@@ -8,7 +8,7 @@ import crypto from "crypto";
 
 const guildResponse = (data: SelectGuild) => {
   return {
-    content: `ID: ${data.id}\nGuild ID: ${data.guildId}\nCreated At: ${data.createdAt}\nUpdated At: ${data.updateAt}`,
+    content: `ID: ${data.id}\nGuild ID: ${data.guildId}\nCreated At: ${data.createdAt}`,
   };
 };
 
@@ -45,10 +45,7 @@ export default defineCommand({
       if (!guildData) {
         console.log("Guild not found, inserting new guild");
 
-        const newGuild = await db
-          .insert(guild)
-          .values({ id: crypto.randomUUID(), guildId: interaction.guildId! })
-          .returning();
+        const newGuild = await db.insert(guild).values({ guildId: interaction.guildId! }).returning();
 
         guildData = newGuild[0];
       }

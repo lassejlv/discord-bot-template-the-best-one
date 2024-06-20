@@ -1,13 +1,15 @@
 import { sql } from "drizzle-orm";
-import { text, sqliteTable, integer } from "drizzle-orm/sqlite-core";
+import { pgTable, text, uuid } from "drizzle-orm/pg-core";
 
-export const guild = sqliteTable("guilds", {
-  id: text("id").primaryKey(),
+export const guild = pgTable("guilds", {
+  id: uuid("id").primaryKey().defaultRandom(),
   guildId: text("guild_id").notNull(),
   createdAt: text("created_at")
     .default(sql`(CURRENT_TIMESTAMP)`)
     .notNull(),
-  updateAt: integer("updated_at", { mode: "timestamp" }).$onUpdate(() => new Date()),
+  updatedAt: text("updated_at")
+    .default(sql`(CURRENT_TIMESTAMP)`)
+    .notNull(),
 });
 
 export type InsertGuild = typeof guild.$inferInsert;
