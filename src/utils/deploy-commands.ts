@@ -21,7 +21,7 @@ for await (const file of commandsGlob.scan(".")) {
 }
 
 // Deploy commands to discord
-const rest = new REST({ version: "10" }).setToken(TOKEN!);
+const rest = new REST().setToken(TOKEN!);
 
 // Start spinner
 const spinner = ora("Started deploying commands...").start();

@@ -1,7 +1,6 @@
-import type { SlashCommandProps } from "commandkit";
-import type { Client, RESTPostAPIApplicationCommandsJSONBody } from "discord.js";
+import type { ChatInputCommandInteraction, Client, RESTPostAPIApplicationCommandsJSONBody } from "discord.js";
 
 export interface Command {
   data: RESTPostAPIApplicationCommandsJSONBody;
-  execute: (interaction: SlashCommandProps["interaction"], client: Client<true>) => void;
+  execute: (interaction: ChatInputCommandInteraction, client: Client<true>) => void;
 }

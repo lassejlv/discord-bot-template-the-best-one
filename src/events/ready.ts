@@ -9,7 +9,8 @@ export default defineEvent({
     console.log("Run `bun run deploy` to deploy slash-commands.");
 
     client.user?.setActivity({
-      name: "/help for commands lol",
+      name: "hello?",
+      state: "what do you want?",
     });
   },
 });

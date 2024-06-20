@@ -17,6 +17,7 @@ export default defineCommand({
 
   execute: async (interaction, client) => {
     const ephemeral = interaction.options.getBoolean("ephemeral", true);
+    await interaction.deferReply({ ephemeral });
 
     await interaction.reply({
       content: "Pong!",

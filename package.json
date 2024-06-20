@@ -4,7 +4,6 @@
   "type": "module",
   "devDependencies": {
     "@types/bun": "latest",
-    "commandkit": "^0.1.10",
     "drizzle-kit": "^0.22.7",
     "prisma": "5.15.0"
   },

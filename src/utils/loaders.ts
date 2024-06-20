@@ -1,4 +1,4 @@
-import client from "@/main";
+import { client } from "@/main";
 import path from "path";
 import type { Command } from "@/types/Command";
 import { Glob } from "bun";
