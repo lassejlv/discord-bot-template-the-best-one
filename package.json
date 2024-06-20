@@ -28,6 +28,7 @@
     "start": "bun src/main.ts",
     "start:shard": "bun src/utils/shard.ts",
     "compile": "bun build --compile --minify src/main.ts --outfile bot",
+    "migrate": "bunx drizzle-kit generate && bunx drizzle-kit migrate",
     "deploy": "bun src/utils/deploy-commands.ts"
   }
 }
