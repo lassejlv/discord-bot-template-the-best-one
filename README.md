@@ -6,7 +6,7 @@ This template will be updated with new features and improvements. If you have an
 
 ## Features
 
-- Drizzle ORM (with turso)
+- Prisma ORM
 - Command Handler
 - Event Handler
 - Type Safe
@@ -36,9 +36,8 @@ Required environment variables:
 
 ```
 # For database you can choose between the ones that prismas support.
-# In this case we are using sqlite (turso)
-TURSO_CONNECTION_URL=
-TURSO_AUTH_TOKEN=
+# In this case we are using postgresql as the database.
+DATABASE_URL=
 DISCORD_TOKEN=
 REDIS_PASSWORD=
 REDIS_HOST=
