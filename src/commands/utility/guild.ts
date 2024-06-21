@@ -1,12 +1,10 @@
-import { db } from "@/db";
-import { guild, type SelectGuild } from "@/db/schemas/guild";
-import { eq } from "drizzle-orm";
 import { isDeveloper } from "@/utils/helpers";
+import type { Guild } from "@prisma/client";
+import { prisma } from "@/db";
 import defineCommand from "@/utils/defineCommand";
 import redis from "@/utils/redis";
-import crypto from "crypto";
 
-const guildResponse = (data: SelectGuild) => {
+const guildResponse = (data: Guild) => {
   return {
     content: `ID: ${data.id}\nGuild ID: ${data.guildId}\nCreated At: ${data.createdAt}`,
   };
@@ -38,16 +36,14 @@ export default defineCommand({
       console.log("Not cached guild");
 
       // Find the guild in db and cache it
-      let guildData = await db.query.guild.findFirst({
-        where: eq(guild.guildId, interaction.guildId!),
-      });
+      let guildData = await prisma.guild.findUnique({ where: { guildId: interaction.guildId! } });
 
       if (!guildData) {
         console.log("Guild not found, inserting new guild");
 
-        const newGuild = await db.insert(guild).values({ guildId: interaction.guildId! }).returning();
+        const newGuild = await prisma.guild.create({ data: { guildId: interaction.guildId! } });
 
-        guildData = newGuild[0];
+        guildData = newGuild;
       }
 
       await redis.set(`guild:${interaction.guildId}`, JSON.stringify(guildData)); // Cache the guild
