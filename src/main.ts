@@ -2,7 +2,7 @@ import { Client, GatewayIntentBits } from "discord.js";
 import { loadCommands, loadEvents } from "./utils/loaders";
 
 export const client = new Client({
-  intents: Object.keys(GatewayIntentBits).map((key) => GatewayIntentBits[key as keyof typeof GatewayIntentBits]),
+  intents: [],
 });
 
 loadCommands("./src/commands/**/*.ts");

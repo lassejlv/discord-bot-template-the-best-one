@@ -9,6 +9,9 @@ COPY . .
 # Install dependencies
 RUN bun install --no-save
 
+# Prisma Generate
+RUN bunx prisma generate --no-engine
+
 # Deploy Application Commands
 RUN bun run deploy
 

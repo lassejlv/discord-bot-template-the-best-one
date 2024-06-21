@@ -6,7 +6,7 @@ import redis from "@/utils/redis";
 
 const guildResponse = (data: Guild) => {
   return {
-    content: `ID: ${data.id}\nGuild ID: ${data.guildId}\nCreated At: ${data.createdAt}`,
+    content: `ID: ${data.id}\nGuild ID: ${data.guildId}\nCreated At: ${data.createdAt}\nUpdated At: ${data.updateAt}`,
   };
 };
 
