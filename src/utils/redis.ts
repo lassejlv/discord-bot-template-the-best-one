@@ -2,7 +2,7 @@ import { createClient } from "redis";
 
 const PASSWORD = process.env.REDIS_PASSWORD;
 const HOST = process.env.REDIS_HOST;
-const PORT = parseInt(process.env.REDIS_PORT!);
+const PORT = process.env.REDIS_PORT;
 
 if (!PASSWORD || !HOST || !PORT) throw new Error("Missing Redis environment variables");
 
@@ -18,7 +18,7 @@ redis.on("error", async (error) => {
   console.error(`Redis error: ${error}`);
 
   redis.disconnect();
-  await new Promise((resolve) => setTimeout(resolve, 1000));
+  await new Promise((resolve) => setTimeout(resolve, 1200));
   redis.connect();
 });
 
