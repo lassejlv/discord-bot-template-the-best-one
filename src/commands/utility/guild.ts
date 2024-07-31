@@ -36,17 +36,24 @@ export default defineCommand({
       console.log("Not cached guild");
 
       // Find the guild in db and cache it
-      let guildData = await prisma.guild.findUnique({ where: { guildId: interaction.guildId! } });
+      let guildData = await prisma.guild.findUnique({
+        where: { guildId: interaction.guildId! },
+      });
 
       if (!guildData) {
         console.log("Guild not found, inserting new guild");
 
-        const newGuild = await prisma.guild.create({ data: { guildId: interaction.guildId! } });
+        const newGuild = await prisma.guild.create({
+          data: { guildId: interaction.guildId! },
+        });
 
         guildData = newGuild;
       }
 
-      await redis.set(`guild:${interaction.guildId}`, JSON.stringify(guildData)); // Cache the guild
+      await redis.set(
+        `guild:${interaction.guildId}`,
+        JSON.stringify(guildData)
+      ); // Cache the guild
 
       return interaction.editReply(guildResponse(guildData));
     }

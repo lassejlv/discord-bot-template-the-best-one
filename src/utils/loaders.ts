@@ -13,7 +13,8 @@ const loadCommands = async (pathToSearch: string) => {
     const filePath = path.resolve(process.cwd(), file);
     const { data, execute } = await import(filePath).then((m) => m.default);
 
-    if (!data || !execute) throw new Error(`Missing data or execute function in ${file}`);
+    if (!data || !execute)
+      throw new Error(`Missing data or execute function in ${file}`);
 
     commands.set(data.name, { data, execute });
   }
@@ -25,11 +26,14 @@ const loadEvents = async (pathToSearch: string) => {
   // Get all events
   for await (const file of eventsGlob.scan(".")) {
     const filePath = path.resolve(process.cwd(), file);
-    const { name, once, execute } = await import(filePath).then((m) => m.default);
+    const { name, once, execute } = await import(filePath).then(
+      (m) => m.default
+    );
 
     const eventName = Events[name as keyof typeof Events] as keyof ClientEvents;
 
-    if (!name || !execute) throw new Error(`Missing name or execute function in ${filePath}`);
+    if (!name || !execute)
+      throw new Error(`Missing name or execute function in ${filePath}`);
 
     if (once) {
       client.once(eventName, (...args) => execute(client, ...args));

@@ -15,7 +15,8 @@ for await (const file of commandsGlob.scan(".")) {
   const filePath = path.resolve(process.cwd(), file);
   const { data, execute } = await import(filePath).then((m) => m.default);
 
-  if (!data || !execute) throw new Error(`Missing data or execute function in ${filePath}`);
+  if (!data || !execute)
+    throw new Error(`Missing data or execute function in ${filePath}`);
 
   commands.push(data);
 }
